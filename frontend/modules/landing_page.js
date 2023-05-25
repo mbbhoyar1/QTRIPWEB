@@ -16,12 +16,17 @@ async function init() {
 
 //Implementation of fetch call
 async function fetchCities() {
+
   // TODO: MODULE_CITIES
   // 1. Fetch cities using the Backend API and return the data
+  try{
   let responce = await fetch("http://3.6.84.0:8082/cities");
   let json = await responce.json();
 
   return json;
+  }catch(e){
+    return null;
+  }
 
 }
 

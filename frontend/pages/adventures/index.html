@@ -146,6 +146,10 @@
 
         //executed when onChange() is triggered on duration filter dropdown
         function selectDuration(event) {
+            const selectedDuration = event.target.value
+            filters["duration"] = selectDuration
+
+            let filteredFunction = filterFunction(adventure, filters)
             // TODO: MODULE_FILTERS
             // 1. Change the DOM to show the selected duration filter. Use the provided input event
             // 2. Invoke saveFiltersToLocalStorage here
@@ -154,6 +158,7 @@
 
         //executed when clear button is clicked on duration filter dropdown
         function clearDuration(event) {
+            
             // TODO: MODULE_FILTERS
             // 1. Change the DOM to clear the Duration filter. Refer clearCategory() below
             // 2. Invoke saveFiltersToLocalStorage here

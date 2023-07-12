@@ -41,7 +41,6 @@ function addAdventureToDOM(adventures) {
   // TODO: MODULE_ADVENTURES
   // 1. Populate the Adventure Cards and insert those details into the DOM
 
-  //
   adventures.forEach(({ id, category, image, name, costPerHead, duration }) => {
   let element = document.createElement("div");
   element.className = "col-6 col-lg-3 mb-4"
@@ -89,14 +88,27 @@ function filterByDuration(list, low, high) {
 function filterByCategory(list, categoryList) {
   const filteredList = list.filter((adventure) => categoryList.includes(adventure.category));
   return filteredList;
+
+  const duration = filters["duration"];
+
+  const low = duration.split("-")[0]
+  const high = duration.split("-")[1]
+
+  const filteredListByDuration = filterByDuration(list, low, high);
+  
+  const filteredListByCategory = filterByCategory(list, filters['category'])
+
+  // Return the appropriate filtered list based on the filters applied
+  if (filters["duration"].length > 0 && filters["category"].length > 0) {
+    return filteredListByDuration.filter(adventure => filteredListByCategory.includes(adventure));
+  } else if (filters["duration"].length > 0) {
+    return filteredListByDuration;
+  } else if (filters["category"].length > 0) {
+    return filteredListByCategory;
+  } else {
+    return list; // Return the original list if no filters applied
+  }
 }
-
-// filters object looks like this filters = { duration: "", category: [] };
-
-//Implementation of combined filter function that covers the following cases :
-// 1. Filter by duration only
-// 2. Filter by category only
-// 3. Filter by duration and category together
 function filterFunction(list, filters) {
   // TODO: MODULE_FILTERS
   // 1. Handle the 3 cases detailed in the comments above and return the filtered list of adventures
@@ -123,6 +135,8 @@ function filterFunction(list, filters) {
 }
 
 
+
+
 // function filterFunction(list, filters) {
 //   // TODO: MODULE_FILTERS
 //   // 1. Handle the 3 cases detailed in the comments above and return the filtered list of adventures
@@ -146,20 +160,7 @@ function filterFunction(list, filters) {
   //   filteredList = filterByDuration()
   //   filteredList = filterByCategory()
 
-  // }else if(filters["duration"].length> 0){
-  //   filteredList = filterByDuration()
-  // }else if(filters["category"].length> 0){
-  //   filteredList = filterByCategory()
-  // }else{
 
-  // }
-
-
-  // // Place holder for functionality to work in the Stubs
-  // return list;
-
-
-//Implementation of localStorage API to save filters to local storage. This should get called everytime an onChange() happens in either of filter dropdowns
 function saveFiltersToLocalStorage(filters) {
   // TODO: MODULE_FILTERS
   // 1. Store the filters as a String to  localStorage

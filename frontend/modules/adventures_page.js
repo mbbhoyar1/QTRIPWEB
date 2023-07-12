@@ -73,28 +73,22 @@ document.getElementById("data").appendChild(element);
 }
 
 //Implementation of filtering by duration which takes in a list of adventures, the lower bound and upper bound of duration and returns a filtered list of adventures.
-function filterByDuration(list, low, high) {
-  // TODO: MODULE_FILTERS
-  // 1. Filter adventures based on Duration and return filtered list
 
-  const filteredList = list.filter((adventure)=> {
-    if(adventure.duration > low && adventure.duration <=high){
+function filterByDuration(list, low, high) {
+  const filteredList = list.filter((adventure) => {
+    if (adventure.duration > low && adventure.duration <= high) {
       return adventure;
     }
-  })
+  });
   return filteredList;
 }
 
 
 //Implementation of filtering by category which takes in a list of adventures, list of categories to be filtered upon and returns a filtered list of adventures.
+
 function filterByCategory(list, categoryList) {
-  // TODO: MODULE_FILTERS
-  // 1. Filter adventures based on their Category and return filtered list
-  let filteredList = list.filter(adventure => categoryList.includes(adventure.category));
-
-  // Return the filtered list
+  const filteredList = list.filter((adventure) => categoryList.includes(adventure.category));
   return filteredList;
-
 }
 
 // filters object looks like this filters = { duration: "", category: [] };

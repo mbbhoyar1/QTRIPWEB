@@ -88,27 +88,8 @@ function filterByDuration(list, low, high) {
 function filterByCategory(list, categoryList) {
   const filteredList = list.filter((adventure) => categoryList.includes(adventure.category));
   return filteredList;
-
-  const duration = filters["duration"];
-
-  const low = duration.split("-")[0]
-  const high = duration.split("-")[1]
-
-  const filteredListByDuration = filterByDuration(list, low, high);
-  
-  const filteredListByCategory = filterByCategory(list, filters['category'])
-
-  // Return the appropriate filtered list based on the filters applied
-  if (filters["duration"].length > 0 && filters["category"].length > 0) {
-    return filteredListByDuration.filter(adventure => filteredListByCategory.includes(adventure));
-  } else if (filters["duration"].length > 0) {
-    return filteredListByDuration;
-  } else if (filters["category"].length > 0) {
-    return filteredListByCategory;
-  } else {
-    return list; // Return the original list if no filters applied
-  }
 }
+
 function filterFunction(list, filters) {
   // TODO: MODULE_FILTERS
   // 1. Handle the 3 cases detailed in the comments above and return the filtered list of adventures
@@ -186,17 +167,15 @@ function getFiltersFromLocalStorage() {
 // 2. Update the category pills on the DOM
 
 function generateFilterPillsAndUpdateDOM(filters) {
-  // TODO: MODULE_FILTERS
-  // 1. Use the filters given as input, update the Duration Filter value and Generate Category Pills
-  const categories = filters ['category'];
-  console.log(categories)
-  categories.forEach((key)=> {
-  let el = document.createElement("div");
-  el.className = "category-filter";
-  el.innerHTML = `<div>${key}</div>`
-  document.getElementById('category-list').appendChild()
-
-})
+  const categories = filters['category'];
+  console.log(categories);
+  const categoryList = document.getElementById('category-list');
+  categories.forEach((key) => {
+    let el = document.createElement("div");
+    el.className = "category-filter";
+    el.innerHTML = `<div>${key}</div>`;
+    categoryList.appendChild(el);
+  });
 
 }
 export {

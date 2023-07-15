@@ -146,7 +146,7 @@ function conditionalRenderingOfReservationPanel(adventure) {
     } else {
       // If not available, hide the reservation panel and show the sold-out message
       reservationPanelAvailable.style.display = 'none';
-      reservationPanelSoldOut.style.display = '';
+      reservationPanelSoldOut.style.display = 'block';
     }
   
     // Set the cost per head value

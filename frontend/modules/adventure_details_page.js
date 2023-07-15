@@ -129,22 +129,32 @@ function conditionalRenderingOfReservationPanel(adventure) {
   // TODO: MODULE_RESERVATIONS
   // 1. If the adventure is already reserved, display the sold-out message.
   // Get the element representing the reservation panel
-  const reservationPanelSoldOut = document.getElementById('reservation-panel-sold-out');
-  const reservationPanelAvailable = document.getElementById('reservation-panel-available');
+  
+    // TODO: MODULE_RESERVATIONS
+    // 1. If the adventure is already reserved, display the sold-out message.
+  
+    // Get the element representing the reservation panel
+    const reservationPanelSoldOut = document.getElementById('reservation-panel-sold-out');
+    const reservationPanelAvailable = document.getElementById('reservation-panel-available');
 
-  // Check if the adventure is available
-  if (adventure.available) {
-    // If available, show the reservation panel and hide the sold-out message
-    reservationPanelAvailable.style.display = 'block';
-    reservationPanelSoldOut.style.display = 'none';
-  } else {
-    // If not available, hide the reservation panel and show the sold-out message
-    reservationPanelAvailable.style.display = 'none';
-    reservationPanelSoldOut.style.display = '';
+  
+    // Check if the adventure is available
+    if (adventure.available) {
+      // If available, show the reservation panel and hide the sold-out message
+      reservationPanelAvailable.style.display = 'block';
+      reservationPanelSoldOut.style.display = 'none';
+    } else {
+      // If not available, hide the reservation panel and show the sold-out message
+      reservationPanelAvailable.style.display = 'none';
+      reservationPanelSoldOut.style.display = '';
+    }
+  
+    // Set the cost per head value
+    const reservationPersonCost = document.getElementById('reservation-person-cost');
+    reservationPersonCost.innerHTML = adventure.costPerHead;
   }
 
 
-}
 
 //Implementation of reservation cost calculation based on persons
 // function calculateReservationCostAndUpdateDOM(adventure, persons) {

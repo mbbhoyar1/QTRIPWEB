@@ -53,7 +53,7 @@ function addReservationToTable(reservations) {
     row.appendChild(nameCell);
 
     const adventureCell = document.createElement('td');
-    adventureCell.textContent = reservation.adventure;
+    adventureCell.textContent = reservation.adventureName;
     row.appendChild(adventureCell);
 
     const personCell = document.createElement('td');

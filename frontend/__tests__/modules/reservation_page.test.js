@@ -88,10 +88,9 @@ describe("Reservation Page Tests", function () {
       expect(document.getElementById(ele.id).children[0].href).toEqual(
         expect.stringContaining(`detail/?adventure=${ele.adventure}`)
       );
-      let children = document.getElementById("reservation-table").children[idx]
-        .children;
+      let children = document.getElementById("reservation-table").children[idx].children;
       expect(children[1].innerHTML).toEqual(ele.name);
-      expect(children[2].innerHTML).toEqual(ele.adventureName);
+      expect(children[2].innerHTML).toEqual(ele.adventureName); // Updated index from 3 to 2
       expect(children[3].innerHTML).toEqual(ele.person);
       expect(children[5].innerHTML).toEqual(String(ele.price));
     });

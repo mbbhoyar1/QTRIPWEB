@@ -128,27 +128,113 @@ function addBootstrapPhotoGallery(images) {
 function conditionalRenderingOfReservationPanel(adventure) {
   // TODO: MODULE_RESERVATIONS
   // 1. If the adventure is already reserved, display the sold-out message.
+  // Get the element representing the reservation panel
+  const reservationPanelSoldOut = document.getElementById('reservation-panel-sold-out');
+  const reservationPanelAvailable = document.getElementById('reservation-panel-available');
+
+  // Check if the adventure is available
+  if (adventure.available) {
+    // If available, show the reservation panel and hide the sold-out message
+    reservationPanelAvailable.style.display = '';
+    reservationPanelSoldOut.style.display = 'none';
+  } else {
+    // If not available, hide the reservation panel and show the sold-out message
+    reservationPanelAvailable.style.display = 'none';
+    reservationPanelSoldOut.style.display = '';
+  }
+
 
 }
 
 //Implementation of reservation cost calculation based on persons
-function calculateReservationCostAndUpdateDOM(adventure, persons) {
-  // TODO: MODULE_RESERVATIONS
-  // 1. Calculate the cost based on number of persons and update the reservation-cost field
+// function calculateReservationCostAndUpdateDOM(adventure, persons) {
+//   // TODO: MODULE_RESERVATIONS
+//   // 1. Calculate the cost based on number of persons and update the reservation-cost field
+//   const Totalcostof = document.getElementById('reservation-cost');
+//   const totalCost = adventure.costPerHead * persons;
+//   Totalcostof.style.display = totalCost ;
+//   // let totalcost = adventure.costPerHead * persons ;
 
+
+
+// }
+function calculateReservationCostAndUpdateDOM(adventure, persons) {
+  // Calculate the total cost
+  const totalCost = adventure.costPerHead * persons;
+
+  // Get the element representing the reservation cost
+  const reservationCost = document.getElementById('reservation-cost');
+
+  // Update the DOM with the total cost
+  reservationCost.textContent = totalCost;
 }
 
 //Implementation of reservation form submission
 function captureFormSubmit(adventure) {
+
+
   // TODO: MODULE_RESERVATIONS
   // 1. Capture the query details and make a POST API call using fetch() to make the reservation
   // 2. If the reservation is successful, show an alert with "Success!" and refresh the page. If the reservation fails, just show an alert with "Failed!".
+  const form = document.getElementById('myForm');
+
+  // Add event listener for form submission
+  form.addEventListener('submit', async function (event) {
+    event.preventDefault(); // Prevent the default form submission behavior
+
+    // Capture the form data
+    // const formData = new FormData(form);
+    // formData.append('adventure', adventure.id);
+    let formData = form.elements;
+
+    let bodystring = JSON.stringify({
+      name: formData["name"].value,
+      date: formData["date"].value,
+      person: formData["person"].value,
+      adventure: adventure.id,
+    });
+
+
+    try {
+      // Make the POST API call using fetch()
+      let url = config.backendEndpoint + "/reservations/new";
+      //const response = await fetch(`${config.backendEndpoint}/adventures/detail?adventure=${adventureId}`);
+      const response = await fetch(url, {
+        method: 'POST',
+        body: bodystring,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      // Check if the reservation is successful
+      if (response.ok) {
+        // Reservation successful
+        alert('Success!');
+        location.reload(); // Refresh the page to update the reservation status
+      } else {
+        // Reservation failed
+        alert('Failed!');
+      }
+    } catch (error) {
+      // Handle any errors that occur during the API call
+      console.error('Error:', error);
+      alert('mb!');
+    }
+  });
 }
 
 //Implementation of success banner after reservation
 function showBannerIfAlreadyReserved(adventure) {
+
   // TODO: MODULE_RESERVATIONS
   // 1. If user has already reserved this adventure, show the reserved-banner, else don't
+  if(adventure.reserved){
+    document.getElementById("reserved-banner").style.display="block";
+  }else{
+    document.getElementById("reserved-banner").style.display= "none";
+  }
+
 
 }
 

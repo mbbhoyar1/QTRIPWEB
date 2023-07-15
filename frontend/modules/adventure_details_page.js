@@ -135,7 +135,7 @@ function conditionalRenderingOfReservationPanel(adventure) {
   // Check if the adventure is available
   if (adventure.available) {
     // If available, show the reservation panel and hide the sold-out message
-    reservationPanelAvailable.style.display = '';
+    reservationPanelAvailable.style.display = 'block';
     reservationPanelSoldOut.style.display = 'none';
   } else {
     // If not available, hide the reservation panel and show the sold-out message

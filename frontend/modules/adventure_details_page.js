@@ -122,6 +122,8 @@ function addBootstrapPhotoGallery(images) {
 
   // Append the carousel container to the photo gallery element
   photoGalleryElement.appendChild(carouselContainer);
+
+  
 }
 
 //Implementation of conditional rendering of DOM based on availability
